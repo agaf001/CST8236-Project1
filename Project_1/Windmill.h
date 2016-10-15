@@ -6,7 +6,7 @@ class Windmill
 {
 public:
 	Windmill(std::string bodyTexture, std::string bladeTexture);
-	sf::Vector2<float> DrawWindmill(sf::RenderTarget *target, float xMov, float yMov, float roatPointX, float rotPointY, float speed, const sf::Transform &parentTransform = sf::Transform::Identity);
+	sf::Vector2<float> DrawWindmill(sf::RenderTarget *target, float xMov, float yMov, float roatPointX, float rotPointY, const sf::Transform &parentTransform = sf::Transform::Identity);
 	void CreateWindmill(sf::Vector2<float> position);
 	void Windmill::ResetPosiiton();
 

@@ -10,14 +10,10 @@ Windmill::Windmill(std::string bodyTexture, std::string bladeTexture)
 void Windmill::CreateWindmill(sf::Vector2<float> position)
 {
 	m_position = position;
-	//sf::RenderWindow window(sf::VideoMode(800, 600), "Template", sf::Style::Titlebar | sf::Style::Close);
 
-	//sf::RectangleShape base(sf::Vector2<float>(15.0f, 30.0f));
-	//sf::Texture WindmillBaseTexture;
-	m_windMillBaseTexture.loadFromFile("WindmillBase.JPG");
+	m_windMillBaseTexture.loadFromFile(m_bodyTexturePath);
 
-	
-	m_windMillBladeTexture.loadFromFile("blade.JPG");
+	m_windMillBladeTexture.loadFromFile(m_bladeTexutrePath);
 
 
 	m_windMillBaseSprite.setTexture(m_windMillBaseTexture);
@@ -26,17 +22,14 @@ void Windmill::CreateWindmill(sf::Vector2<float> position)
 
 	m_windMillBodyOrigin.x = -m_windMillBaseSprite.getLocalBounds().width;
 	m_windMillBodyOrigin.y = -50.0f;
-	//m_windMillBaseSprite.setOrigin(m_windMillBodyOrigin);
-	//m_windMillBaseSprite.setOrigin(40.0f, 5.0f);
+
 	m_windMillBaseSprite.setOrigin(m_windMillBaseSprite.getLocalBounds().width/2, m_windMillBaseSprite.getLocalBounds().height/2);
 	
 
 	//TOP BLADE
-	//sf::Sprite m_windmillBladeSpriteT;
 	m_windMillBladeSpriteT.setTexture(m_windMillBladeTexture);
 	m_windMillBladeSpriteT.setScale(1.2f, 1.0f);
 	m_windMillBladeSpriteT.setOrigin(0.0f, m_windMillBladeSpriteT.getLocalBounds().height);
-	//m_windMillBladeSpriteT.setPosition(0.0f, -m_windMillBladeSpriteT.getLocalBounds().height * 1.2f);
 	m_windMillBladeSpriteT.setPosition(0.0f, -m_windMillBaseSprite.getLocalBounds().height / 2);
 
 
@@ -45,7 +38,6 @@ void Windmill::CreateWindmill(sf::Vector2<float> position)
 	m_windMillBladeSpriteT.setScale(1.2f, 1.0f);
 	m_windMillBladeSpriteR.setOrigin(0.0f, m_windMillBladeSpriteR.getLocalBounds().height);
 	m_windMillBladeSpriteR.setPosition(0.0f, -m_windMillBaseSprite.getLocalBounds().height / 2);
-	//windmillBladeSpriteR.setPosition(0.0f, 0.0f);
 	m_windMillBladeSpriteR.setRotation(90);
 
 	//BOTTOM BLADE
@@ -69,19 +61,12 @@ void Windmill::CreateWindmill(sf::Vector2<float> position)
 	m_bladeNR.m_CurrentShape = &m_windMillBladeSpriteR;
 	m_bladeNB.m_CurrentShape = &m_windMillBladeSpriteB;
 	m_bladeNL.m_CurrentShape = &m_windMillBladeSpriteL;
-	//TransformNode bladeNT(&m_windmillBladeSpriteT);
-	//TransformNode bladeNR(&windmillBladeSpriteR);
 
-	
 	m_baseN.AddChild(&m_bladeNT);
 	m_baseN.AddChild(&m_bladeNR);
 	m_baseN.AddChild(&m_bladeNB);
 	m_baseN.AddChild(&m_bladeNL);
 
-
-	//m_baseN = baseN;
-
-	//m_windmillBladeSpriteT = windmillBladeSpriteT;
 }
 
 void Windmill::ResetPosiiton() 
@@ -91,7 +76,7 @@ void Windmill::ResetPosiiton()
 	
 }
 
-sf::Vector2<float> Windmill::DrawWindmill(sf::RenderTarget *target, float xMov, float yMov, float roatPointX, float rotPointY, float speed, const sf::Transform &parentTransform)
+sf::Vector2<float> Windmill::DrawWindmill(sf::RenderTarget *target, float xMov, float yMov, float roatPointX, float rotPointY, const sf::Transform &parentTransform)
 {
 	float angleAmount = 90.0f;
 	m_ParentTransform = parentTransform;
@@ -103,51 +88,14 @@ sf::Vector2<float> Windmill::DrawWindmill(sf::RenderTarget *target, float xMov, 
 	m_windMillBladeSpriteB.rotate(angleAmount * m_elaspedTime);
 	m_windMillBladeSpriteL.rotate(angleAmount * m_elaspedTime);
 
-
-	//m_windMillBaseSprite.rotate(angleAmount / xMov);
-	//m_transform.rotate(angleAmount / yMov , { 400.0f, 300.0f});
-	sf::Vector2<float> position2 = m_windMillBaseSprite.getPosition();
-
 	m_windMillBaseSprite.rotate(xMov);
-	m_transform.rotate(yMov*speed , { roatPointX, rotPointY });
-	//m_windMillBaseSprite.setPosition(roatPointX, rotPointY);
-	sf::Vector2f positionAfterRotation = m_transform.transformPoint(position2);
-	
+	m_transform.rotate(yMov , { roatPointX, rotPointY });
 
-
-	//TransformNode m_baseN(&m_windmillBaseSprite);
 	m_baseN.Draw(target, m_transform);
 
-	//sf::Vector2<float> position(m_windMillBaseSprite.getPosition().x, m_windMillBaseSprite.getPosition().y);
 	sf::Vector2<float> position;
 	position.x = m_windMillBaseSprite.getGlobalBounds().left;
 	position.y = m_windMillBaseSprite.getGlobalBounds().top;
 
 	return position;
 }
-
-
-
-
-
-/*
-sf::Event evt;
-sf::Clock appTimer;
-while (window.isOpen()) {
-float deltaTime = appTimer.restart().asSeconds();
-
-while (window.pollEvent(evt)) {
-if (evt.type == sf::Event::Closed) {
-window.close();
-}
-}
-
-
-// do stuff.
-window.clear();
-baseN.Draw(&window);
-//draw stuff
-
-window.display();
-}
-*/
