@@ -12,10 +12,8 @@ int main(int argc, char *argv)
 	Windmill *windmill2 = new Windmill("WindmillBase.JPG", "blade.JPG");
 	Windmill *windmill3 = new Windmill("WindmillBase.JPG", "blade.JPG");
 
-
-	sf::SoundBuffer buffer;
-	buffer.loadFromFile("Wind.wav");
-	sf::Sound sound(buffer);
+	sf::Music music;
+	music.openFromFile("Wind.wav");
 
 	sf::Texture cloudsTexture;
 	cloudsTexture.loadFromFile("tiling_clouds.jpg");
@@ -59,7 +57,7 @@ int main(int argc, char *argv)
 	sf::IntRect backgroundRect = tilingCloudsSprite.getTextureRect();
 	float secondTimer = 0.0f; // elapsed time per second.
 	float movementSpeed = 150.0f; // scrolling movement speed.
-	sound.play();
+	music.play();
 	while (window.isOpen()) {
 		float deltaTime = appTimer.restart().asSeconds();
 		

@@ -73,7 +73,7 @@ void Windmill::ResetPosiiton()
 {
 	m_windMillBaseSprite.setRotation(0);
 	m_transform = m_ParentTransform;
-	
+
 }
 
 sf::Vector2<float> Windmill::DrawWindmill(sf::RenderTarget *target, float xMov, float yMov, float roatPointX, float rotPointY, const sf::Transform &parentTransform)

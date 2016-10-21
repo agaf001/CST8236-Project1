@@ -19,6 +19,7 @@ private:
 	TransformNode m_bladeNB;
 	TransformNode m_bladeNL;
 
+
 	sf::Sprite m_windMillBaseSprite;
 	sf::Sprite m_windMillBladeSpriteT;
 	sf::Sprite m_windMillBladeSpriteR;
